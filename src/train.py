@@ -104,7 +104,7 @@ def main():
 
         valid_loss = validiate(model, val_dataset, criterion, src_pad, trg_pad)
         print('epoch: {:03d} - valid loss: {:.4f}'.format(epoch, valid_loss))
-        torch.save(model.state_dict(), f'../models/model.{epoch}.pth')
+        torch.save(model.state_dict(), f'../models/model.{epoch}.pt')
 
 if __name__=="__main__":
     main()
