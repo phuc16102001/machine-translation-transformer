@@ -38,4 +38,4 @@ class LabelSmoothingLoss(nn.Module):
                 )
                 
         # Negative because log(x) where (x<1) after softmax 
-        return torch.mean(torch.sum(-pred * true_dist))
+        return torch.mean(torch.sum(-pred * true_dist, dim = self.dim))
