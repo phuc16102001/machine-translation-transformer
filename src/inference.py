@@ -1,10 +1,20 @@
 import torch
+
 from modules.transformer import Transformer
 from config.config import config
+from utils.tokenizer import tokenizer
+from utils.field import create_field
 
 def main():
-    src_field = torch.load('../models/src_vocab.pth')
-    trg_field = torch.load('../models/trg_vocab.pth')
+    vi_tokenizer = tokenizer('vi_core_news_lg')
+    en_tokenizer = tokenizer('en_core_web_sm')
+    src_field, trg_field = create_field(vi_tokenizer, en_tokenizer)
+
+    src_vocab = torch.load('../models/src_vocab.pth')
+    trg_vocab = torch.load('../models/trg_vocab.pth')
+    src_field.vocab = src_vocab
+    trg_field.vocab = trg_vocab
+
     d_model = config['d_model']
 
     model = Transformer(
