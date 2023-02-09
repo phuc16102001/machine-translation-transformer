@@ -1,9 +1,9 @@
 import torch
-from modules.transformer import Transformer
 
 def main():
-    src = None
-    model = Transformer()
+    src = torch.load('../models/src_vocab.pth')
+    trg = torch.load('../models/trg_vocab.pth')
+    model = torch.load('../models/model_best.pth')
 
 if __name__=="__main__":
     main()

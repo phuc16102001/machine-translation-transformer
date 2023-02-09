@@ -42,8 +42,8 @@ def main():
     trg_pad = trg_field.vocab.stoi['<pad>']
     print(f"Source vocabulary size: {len(src_field.vocab)}")
     print(f"Target vocabulary size: {len(trg_field.vocab)}")
-    torch.save(src_field.vocab, 'src_vocab.pth')
-    torch.save(trg_field.vocab, 'trg_vocab.pth')
+    torch.save(src_field.vocab, '../models/src_vocab.pth')
+    torch.save(trg_field.vocab, '../models/trg_vocab.pth')
 
     print(f"Creating model with d_model = {d_model}")
     model = Transformer(
