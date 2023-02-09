@@ -18,3 +18,5 @@ if __name__=="__main__":
 
     print(f"Train size: {len(df_train)}")
     print(f"Validate size: {len(df_val)}")
+    print("="*10,"Sample train data","="*10)
+    print(df_train.head())
