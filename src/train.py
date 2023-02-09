@@ -24,8 +24,8 @@ def main():
     print_every = config['print_every']
 
     print("Loading data")
-    df_train = create_data('data/train.vi', 'data/train.en')
-    df_val = create_data('data/tst2013.vi', 'data/tst2013.en')
+    df_train = create_data('../data/train.vi', '../data/train.en')
+    df_val = create_data('../data/tst2013.vi', '../data/tst2013.en')
     print(f"Train size: {len(df_train)}")
     print(f"Validate size: {len(df_val)}")
 
@@ -92,7 +92,7 @@ def main():
         
         for i, batch in enumerate(train_dataset): 
             s = time.time()
-            loss = step(model, opt, batch, criterion)
+            loss = step(model, opt, batch, criterion, src_pad, trg_pad)
             total_loss += loss
             
             if (i + 1) % print_every == 0:
@@ -101,7 +101,7 @@ def main():
                 total_loss = 0
                 
         s = time.time()
-        valid_loss = validiate(model, val_dataset, criterion)
+        valid_loss = validiate(model, val_dataset, criterion, src_pad, trg_pad)
         print('epoch: {:03d} - iter: {:05d} - valid loss: {:.4f} - time: {:.4f}'.format(epoch, i+1, valid_loss, time.time() - s))
 
 if __name__=="__main__":
