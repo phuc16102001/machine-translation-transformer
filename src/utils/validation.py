@@ -1,5 +1,5 @@
 import torch
-from mask import create_mask
+from utils.mask import create_mask
 from config.config import config
 import numpy as np
 
