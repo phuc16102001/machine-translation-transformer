@@ -4,6 +4,7 @@ from modules.transformer import Transformer
 from config.config import config
 from utils.tokenizer import tokenizer
 from utils.field import create_field
+from utils.translator import translate
 
 def main():
     vi_tokenizer = tokenizer('vi_core_news_lg')
@@ -35,7 +36,8 @@ def main():
     ]
 
     for sentence in sentences:
-        print(src_field.preprocess(sentence))
+        print(sentence)
+        print('->',translate(sentence, model, src_field, trg_field))
 
 if __name__=="__main__":
     main()
