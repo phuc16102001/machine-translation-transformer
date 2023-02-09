@@ -4,4 +4,5 @@ config = {
     'd_model': 384,
     'device': 'cuda',
     'epoch': 50,
+    'print_every': 300
 }
