@@ -25,7 +25,9 @@ def main():
         heads = 8,
         dropout = 0.1
     )
-    model.load_state_dict(torch.load('../models/model_best.pth'))
+    model_ckpt = torch.load('../models/model_best.pth')
+    print(model_ckpt)
+    model.load_state_dict(model_ckpt)
 
 if __name__=="__main__":
     main()
