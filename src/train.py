@@ -97,9 +97,8 @@ def main():
         avg_loss = total_loss / print_every
         print(f"average loss: {avg_loss}")
 
-        s = time.time()
         valid_loss = validiate(model, val_dataset, criterion, src_pad, trg_pad)
-        print('epoch: {:03d} - iter: {:05d} - valid loss: {:.4f} - time: {:.4f}'.format(epoch, i+1, valid_loss, time.time() - s))
+        print(f'epoch: {epoch} - valid loss: {valid_loss}')
 
 if __name__=="__main__":
     main()
