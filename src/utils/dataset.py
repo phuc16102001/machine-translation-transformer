@@ -1,5 +1,5 @@
 from torchtext import data
-from config import config
+from ..config.config import config
 import os
 from loader import MyIterator
 
