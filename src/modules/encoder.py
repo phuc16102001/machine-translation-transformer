@@ -1,9 +1,9 @@
 import torch.nn as nn
 from utils.cloner import get_clones
-from embedder import Embedder
-from positional_encoding import PositionalEncoder
-from encoder_layer import EncoderLayer
-from norm import Norm
+from modules.embedder import Embedder
+from modules.positional_encoding import PositionalEncoder
+from modules.encoder_layer import EncoderLayer
+from modules.norm import Norm
 
 class Encoder(nn.Module):
     def __init__(self, vocab_size, d_model, n, heads, dropout=0.1):

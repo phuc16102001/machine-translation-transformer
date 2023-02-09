@@ -1,7 +1,7 @@
 from torchtext import data
 from config.config import config
 import os
-from loader import MyIterator
+from utils.loader import MyIterator
 
 def create_dataset(df, src_field, trg_field, istrain=True):
     max_strlen = config['max_strlen']

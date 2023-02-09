@@ -1,8 +1,8 @@
 import torch.nn as nn
-from embedder import Embedder
-from positional_encoding import PositionalEncoder
-from decoder_layer import DecoderLayer
-from norm import Norm
+from modules.embedder import Embedder
+from modules.positional_encoding import PositionalEncoder
+from modules.decoder_layer import DecoderLayer
+from modules.norm import Norm
 from utils.cloner import get_clones
 
 class Decoder(nn.Module):
