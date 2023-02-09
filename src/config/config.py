@@ -1,8 +1,8 @@
 config = {
     'max_strlen': 120,
-    'batch_size': 320,
+    'batch_size': 1024,
     'd_model': 512,
     'device': 'cuda',
     'epoch': 50,
-    'print_every': 300
+    'print_every': 50
 }
