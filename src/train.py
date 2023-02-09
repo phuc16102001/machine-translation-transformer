@@ -35,12 +35,12 @@ def main():
     
     print("Creating field")
     src_field, trg_field = create_field(vi_tokenizer, en_tokenizer)
-    src_pad = src_field.vocab.stoi['<pad>']
-    trg_pad = trg_field.vocab.stoi['<pad>']
 
     print("Construct dataset")
     train_dataset = create_dataset(df_train, src_field, trg_field)
     val_dataset = create_dataset(df_val, src_field, trg_field, istrain=False)
+    src_pad = src_field.vocab.stoi['<pad>']
+    trg_pad = trg_field.vocab.stoi['<pad>']
     print(f"Source vocabulary size: {len(src_field.vocab)}")
     print(f"Target vocabulary size: {len(trg_field.vocab)}")
 
