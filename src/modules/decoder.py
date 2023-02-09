@@ -3,7 +3,7 @@ from embedder import Embedder
 from positional_encoding import PositionalEncoder
 from decoder_layer import DecoderLayer
 from norm import Norm
-from ..utils.cloner import get_clones
+from utils.cloner import get_clones
 
 class Decoder(nn.Module):
     def __init__(self, vocab_size, d_model, n, heads, dropout=0.1):

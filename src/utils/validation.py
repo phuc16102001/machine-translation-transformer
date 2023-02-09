@@ -1,6 +1,6 @@
 import torch
 from mask import create_mask
-from ..config.config import config
+from config.config import config
 import numpy as np
 
 def validiate(model, valid_iter, criterion, src_pad, trg_pad):

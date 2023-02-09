@@ -1,5 +1,5 @@
 from mask import create_mask
-from ..config.config import config
+from config.config import config
 
 def step(model, opt, batch, criterion, src_pad, trg_pad):
     model.train()

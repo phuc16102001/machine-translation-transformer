@@ -1,5 +1,5 @@
 import torch.nn as nn
-from ..utils.cloner import get_clones
+from utils.cloner import get_clones
 from embedder import Embedder
 from positional_encoding import PositionalEncoder
 from encoder_layer import EncoderLayer
