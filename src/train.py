@@ -21,6 +21,7 @@ def main():
     batch_size = config['batch_size']
     max_strlen = config['max_strlen']
     n_epoch = config['epoch']
+    print_every = config['print_every']
 
     print("Loading data")
     df_train = create_data('../data/train.vi', '../data/train.en')
@@ -90,12 +91,15 @@ def main():
         total_loss = 0
         
         n_iter = 0
-        for batch in tqdm(train_dataset): 
+        for i, batch in enumerate(train_dataset): 
             loss = step(model, opt, batch, criterion, src_pad, trg_pad)
-            total_loss += loss
             n_iter += 1
-        avg_loss = total_loss / n_iter
-        print(f"average loss: {avg_loss}")
+            total_loss += loss
+            if ((i+1)%print_every==0):
+                avg_loss = total_loss / n_iter
+                total_loss = 0
+                n_iter = 0
+            print(f"average loss: {avg_loss}")
 
         valid_loss = validiate(model, val_dataset, criterion, src_pad, trg_pad)
         print(f'epoch: {epoch} - valid loss: {valid_loss}')
