@@ -99,7 +99,7 @@ def main():
                 avg_loss = total_loss / n_iter
                 total_loss = 0
                 n_iter = 0
-                print("iter: {:03d} - average loss: {:.4f}".format(i+1, avg_loss))
+                print("epoch: {:03d} - iter: {:04d} - average loss: {:.4f}".format(epoch, i+1, avg_loss))
 
         valid_loss = validiate(model, val_dataset, criterion, src_pad, trg_pad)
         print('epoch: {:03d} - valid loss: {:.4f}'.format(epoch, valid_loss))
