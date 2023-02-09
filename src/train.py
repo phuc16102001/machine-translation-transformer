@@ -91,7 +91,7 @@ def main():
     for epoch in range(n_epoch):
         total_loss = 0
         
-        for i, batch in tqdm(enumerate(train_dataset)): 
+        for batch in tqdm(train_dataset): 
             loss = step(model, opt, batch, criterion, src_pad, trg_pad)
             total_loss += loss
         avg_loss = total_loss / print_every
