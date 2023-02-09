@@ -3,6 +3,6 @@ config = {
     'batch_size': 1500,
     'd_model': 512,
     'device': 'cuda',
-    'epoch': 50,
+    'epoch': 5,
     'print_every': 200
 }

@@ -26,7 +26,6 @@ def main():
         dropout = 0.1
     )
     model_ckpt = torch.load('../models/model_best.pt')
-    print(model_ckpt)
     model.load_state_dict(model_ckpt)
 
 if __name__=="__main__":
