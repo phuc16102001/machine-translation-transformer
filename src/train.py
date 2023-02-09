@@ -14,6 +14,7 @@ from utils.step import step
 from utils.validation import validiate
 
 from modules.transformer import Transformer
+from tqdm import tqdm
 
 def main():
     device = config['device']
@@ -90,16 +91,12 @@ def main():
     for epoch in range(n_epoch):
         total_loss = 0
         
-        for i, batch in enumerate(train_dataset): 
-            s = time.time()
+        for i, batch in tqdm(enumerate(train_dataset)): 
             loss = step(model, opt, batch, criterion, src_pad, trg_pad)
             total_loss += loss
-            
-            if (i + 1) % print_every == 0:
-                avg_loss = total_loss / print_every
-                print('epoch: {:03d} - iter: {:05d} - train loss: {:.4f} - time: {:.4f}'.format(epoch, i+1, avg_loss, time.time()- s))
-                total_loss = 0
-                
+        avg_loss = total_loss / print_every
+        print(f"average loss: {avg_loss}")
+
         s = time.time()
         valid_loss = validiate(model, val_dataset, criterion, src_pad, trg_pad)
         print('epoch: {:03d} - iter: {:05d} - valid loss: {:.4f} - time: {:.4f}'.format(epoch, i+1, valid_loss, time.time() - s))
