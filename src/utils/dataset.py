@@ -1,7 +1,7 @@
 from torchtext import data
 from config.config import config
 import os
-from utils.loader import MyIterator
+from utils.loader import MyIterator, batch_size_fn
 
 def create_dataset(df, src_field, trg_field, istrain=True):
     max_strlen = config['max_strlen']
@@ -36,6 +36,7 @@ def create_dataset(df, src_field, trg_field, istrain=True):
         repeat = False, 
         sort_key = lambda x: (len(x.src), len(x.trg)),
         train = istrain, 
-        shuffle = True
+        shuffle = True,
+        batch_size_fn = batch_size_fn
     )
     return iterator
