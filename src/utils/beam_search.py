@@ -74,7 +74,6 @@ def beam_search(sentence, model, src_field, trg_field, device, k, max_strlen):
             _, best_idx = torch.max(rate, 1)
             break
 
-    best_sentence = k_res[best_idx]
-    length = (best_sentence==eos_token).nonzero()
-    print(best_sentence, length)
+    best_sentence = k_res[best_idx].view(-1)
+    length = (best_sentence==eos_token).nonzero()[0]
     return best_sentence, length
