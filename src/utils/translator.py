@@ -32,7 +32,7 @@ def translate(sentence, model, src_field, trg_field):
         k,
         max_strlen
     )
-    print(sentence)
+    sentence = sentence.view(-1)
     sentence = ' '.join([trg_field.vocab.itos[tok] for tok in sentence[1: sentence_len]])
     sentence = multiple_replace({
         ' ?': '?',
