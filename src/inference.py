@@ -6,7 +6,9 @@ from utils.tokenizer import tokenizer
 from utils.field import create_field
 from utils.translator import translate
 
-def main():
+from argparse import ArgumentParser
+
+def main(args):
     print("Creating tokenizer")
     vi_tokenizer = tokenizer('vi_core_news_lg')
     en_tokenizer = tokenizer('en_core_web_sm')
@@ -34,9 +36,18 @@ def main():
     model = model.to(device)
 
     print("Running inference")
-    sentence = "Xin chào bạn, tui là Đỗ Vương Phúc. Tớ là sinh viên năm cuối. Hiện đang học chuyên ngành Khoa học máy tính"
+    sentence = args.prompt
     print(f"Input: {sentence}")
     print(f"Output: {translate(sentence, model, src_field, trg_field)}")
 
 if __name__=="__main__":
-    main()
+    parser = ArgumentParser()
+    parser.add_argument(
+        '-p',
+        '--prompt',
+        type=str,
+        required=True,
+        help="Prompt text to translate (VN)"
+    )
+    args = parser.parse_args()
+    main(args)
