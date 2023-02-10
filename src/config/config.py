@@ -4,5 +4,6 @@ config = {
     'd_model': 512,
     'device': 'cuda',
     'epoch': 10,
-    'print_every': 200
+    'print_every': 200,
+    'k': 7
 }
