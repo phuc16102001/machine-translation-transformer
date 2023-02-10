@@ -20,6 +20,7 @@ def main():
 
     print("Loading model")
     d_model = config['d_model']
+    device = config['device']
     model = Transformer(
         len(src_field.vocab),
         len(trg_field.vocab),
@@ -30,6 +31,7 @@ def main():
     )
     model_ckpt = torch.load('../models/model_best.pt')
     model.load_state_dict(model_ckpt)
+    model = model.to(device)
 
     print("Running inference")
     sentence = "Xin chào bạn, tui là Đỗ Vương Phúc. Tớ là sinh viên năm cuối. Hiện đang học chuyên ngành Khoa học máy tính"
