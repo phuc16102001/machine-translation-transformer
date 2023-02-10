@@ -71,7 +71,6 @@ def beam_search(sentence, model, src_field, trg_field, device, k, max_strlen):
             denom = (sentence_lengths ** alpha).to(device)
             log_scores = log_scores.view(-1).to(device)
             rate = (log_scores / denom).unsqueeze(0)
-            print(rate)
             _, best_idx = torch.max(rate, 1)
             break
 
