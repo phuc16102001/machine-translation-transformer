@@ -70,8 +70,7 @@ def beam_search(sentence, model, src_field, trg_field, device, k, max_strlen):
             alpha = 0.7
             denom = (sentence_lengths ** alpha).to(device)
             log_scores = log_scores.view(-1).to(device)
-            print(log_scores/denom)
-            _, best_idx = torch.max(log_scores / denom)
+            _, best_idx = torch.max((log_scores / denom).unsqueeze(0))
             break
 
     best_sentence = k_res[best_idx]
