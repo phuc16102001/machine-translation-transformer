@@ -8,6 +8,12 @@ def multiple_replace(dict, text):
     regex = re.compile("(%s)" % "|".join(map(re.escape, dict.keys())))
     return regex.sub(lambda mo: dict[mo.string[mo.start():mo.end()]], text) 
 
+def convert_to_word(idx_list, vocab):
+    word_list = []
+    for tok in idx_list:
+        word_list.append(vocab.itos[tok])
+    return ' '.join(word_list)
+
 def translate(sentence, model, src_field, trg_field):
     model.eval()
 
@@ -33,8 +39,8 @@ def translate(sentence, model, src_field, trg_field):
         max_strlen
     )
     sentence = sentence.view(-1)
-    print(sentence, sentence[0])
-    sentence = ' '.join([trg_field.vocab.itos[tok] for tok in sentence[1: sentence_len]])
+    sentence = sentence[1: sentence_len]
+    sentence = convert_to_word(sentence, trg_field.vocab)
     sentence = multiple_replace({
         ' ?': '?',
         ' !': '!',
