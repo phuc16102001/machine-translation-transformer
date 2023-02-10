@@ -29,15 +29,9 @@ def main():
     model_ckpt = torch.load('../models/model_best.pt')
     model.load_state_dict(model_ckpt)
 
-    sentences = [
-        "Xin chào bạn, tui là Đỗ Vương Phúc.",
-        "Tớ là sinh viên năm cuối",
-        "Hiện đang học chuyên ngành Khoa học máy tính"
-    ]
-
-    for sentence in sentences:
-        print(sentence)
-        print('->',translate(sentence, model, src_field, trg_field))
+    sentence = "Xin chào bạn, tui là Đỗ Vương Phúc. Tớ là sinh viên năm cuối. Hiện đang học chuyên ngành Khoa học máy tính"
+    print(sentence)
+    print('->', translate(sentence, model, src_field, trg_field))
 
 if __name__=="__main__":
     main()
