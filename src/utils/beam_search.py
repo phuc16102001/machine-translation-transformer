@@ -7,7 +7,7 @@ import math
 def find_best_k(k_res, last_word_out, current_log_scores, current_length, k):
     
     # Result as (k x k) because topk use last dimension only
-    probs, idx = last_word_out.data.topk(k)
+    probs, last_word_idx = last_word_out.data.topk(k)
     
     # Calculate log probs
     log_scores = []
@@ -26,7 +26,7 @@ def find_best_k(k_res, last_word_out, current_log_scores, current_length, k):
 
     # Create new result from list of row, col
     k_res[:, :current_length] = k_res[row, :current_length] # Keep the row in topk for previous words
-    k_res[:, current_length] = k_idx[row, col]
+    k_res[:, current_length] = last_word_idx[row, col]
 
     return k_res, new_log_scores
 
