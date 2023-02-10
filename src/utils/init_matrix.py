@@ -16,6 +16,7 @@ def create_init_matrix(src, model, src_field, trg_field, device, k, max_len):
     # Predict first output
     trg = torch.LongTensor([[init_token]])
     trg = trg.to(device)
+    print(src, src_mask)
     e_out = model.encoder(src, src_mask)
     d_out = model.decoder(trg, e_out, src_mask, trg_mask)
     out = model.out(d_out) # bs x seq_len x trg_vocab_size
