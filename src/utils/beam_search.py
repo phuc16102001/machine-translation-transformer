@@ -75,5 +75,5 @@ def beam_search(sentence, model, src_field, trg_field, device, k, max_strlen):
             break
 
     best_sentence = k_res[best_idx]
-    sentence_length = (best_sentence==eos_token).nonzero()[0]
-    return best_sentence, sentence_length
+    length = (best_sentence==eos_token).nonzero()
+    return best_sentence, length

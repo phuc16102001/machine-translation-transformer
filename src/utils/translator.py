@@ -38,8 +38,7 @@ def translate(sentence, model, src_field, trg_field):
         k,
         max_strlen
     )
-    print(sentence_len)
-    sentence = sentence.view(-1).tolist()
+    sentence = sentence.view(-1)
     sentence = sentence[1:sentence_len]
     sentence = convert_to_word(sentence, trg_field.vocab)
     sentence = multiple_replace({
