@@ -56,6 +56,7 @@ def beam_search(sentence, model, src_field, trg_field, device, k, max_strlen):
         k_res, log_scores = find_best_k(k_res, out, log_scores, i, k)
 
         # Find result length
+        print((k_res == eos_token).nonzero())
         row_end_idx, col_end_idx = (k_res == eos_token).nonzero()
         sentence_lengths = torch.zeros(k, dtype=torch.long).to(device)
         for idx, length in zip(row_end_idx, col_end_idx):

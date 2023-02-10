@@ -35,8 +35,8 @@ def main():
 
     print("Running inference")
     sentence = "Xin chào bạn, tui là Đỗ Vương Phúc. Tớ là sinh viên năm cuối. Hiện đang học chuyên ngành Khoa học máy tính"
-    print(sentence)
-    print('->', translate(sentence, model, src_field, trg_field))
+    print(f"Input: {sentence}")
+    print(f"Output: {translate(sentence, model, src_field, trg_field)}")
 
 if __name__=="__main__":
     main()
