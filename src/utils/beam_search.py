@@ -10,15 +10,16 @@ def find_best_k(k_res, last_word_out, current_log_scores, current_length, k):
     probs, idx = last_word_out.data.topk(k)
     
     # Calculate log probs
-    log_probs = []
+    log_scores = []
     for p in probs.data.view(-1):
-        log_probs.append(math.log(p))
-    log_probs = log_probs.view(k, -1)   # Reshape back to (k x k)
-    log_probs += current_log_scores     # Calculate total log probs (broadcasting)
+        log_scores.append(math.log(p))
+    log_scores = torch.Tensor(log_scores)
+    log_scores = log_scores.view(k, -1)   # Reshape back to (k x k)
+    log_scores += current_log_scores     # Calculate total log probs (broadcasting)
 
     # Find topk total log score
-    log_probs = log_probs.view(-1)
-    k_probs, k_idx = log_probs.topk(k)
+    log_scores = log_scores.view(-1)
+    k_probs, k_idx = log_scores.topk(k)
     row = k_idx // k
     col = k_idx % k
     new_log_scores = k_probs.unsqueeze(1)
