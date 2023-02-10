@@ -39,6 +39,7 @@ def translate(sentence, model, src_field, trg_field):
         max_strlen
     )
     sentence = sentence.view(-1)
+    print(sentence, sentence_len[0])
     sentence = [sentence[idx] for idx in range(1, sentence_len+1)]
     sentence = convert_to_word(sentence, trg_field.vocab)
     sentence = multiple_replace({
