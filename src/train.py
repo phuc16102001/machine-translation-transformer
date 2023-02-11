@@ -26,7 +26,7 @@ def main():
     n_layers = cfg['n_layers']
     heads = cfg['heads']
     dropout = cfg['dropout']
-    print(cfg)
+    print(json.dumps(cfg, indent=3))
 
     device = 'cpu'
     if (torch.cuda.is_available()): 

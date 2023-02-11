@@ -19,7 +19,7 @@ def main(args):
     cfg = json.load(config_file)
     max_strlen = cfg['max_strlen']
     k = cfg['k']
-    print(cfg)
+    print(json.dumps(cfg, indent=3))
 
     device = 'cpu'
     if (torch.cuda.is_available()): 
