@@ -1,8 +1,8 @@
 import pandas as pd
 
 def create_data(src_path, trg_path):
-    src_data = open(src_path).read().strip().split('\n')
-    trg_data = open(trg_path).read().strip().split('\n')
+    src_data = open(src_path, encoding='utf8').read().strip().split('\n')
+    trg_data = open(trg_path, encoding='utf8').read().strip().split('\n')
 
     df = pd.DataFrame({
         'src': [line for line in src_data],

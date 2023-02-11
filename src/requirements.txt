@@ -3,3 +3,4 @@ pandas==1.5.3
 spacy==3.0.9
 torch==1.13.1
 torchtext==0.6.0
+pyvi==0.1.1

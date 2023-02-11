@@ -47,7 +47,8 @@ def main(args):
         dropout = cfg['dropout']
     )
 
-    model_ckpt = torch.load(os.path.join(model_folder, 'model_best.pt'))
+    model_file = os.path.join(model_folder, 'model_best.pt')
+    model_ckpt = torch.load(model_file, map_location=torch.device(device))
     model.load_state_dict(model_ckpt)
     model = model.to(device)    
 
