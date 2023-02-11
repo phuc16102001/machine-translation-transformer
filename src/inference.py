@@ -24,7 +24,6 @@ def main(args):
     trg_field.vocab = trg_vocab
 
     print("Loading model")
-    d_model = 
     device = cfg['device']
     model = Transformer(
         len(src_field.vocab),
