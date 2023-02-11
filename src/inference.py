@@ -12,9 +12,9 @@ import json
 def main(args):
     config_file = open('../models/config.json')
     cfg = json.load(config_file)
-    max_strlen = config_file['max_strlen']
-    k = config_file['k']
-    device = config_file['device']
+    max_strlen = cfg['max_strlen']
+    k = cfg['k']
+    device = cfg['device']
 
     print("Creating tokenizer")
     vi_tokenizer = tokenizer('vi_core_news_lg')
