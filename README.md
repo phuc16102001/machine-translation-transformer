@@ -9,7 +9,7 @@
 Transformer is a very powerful model because of using the self-attention mechanism under the hood. It can improve the weakness of many types of recurrent neural network (RNN). Moreover, the model can be trained much faster since it can feed all the data once only, instead of one-by-one.
 
 <p align="center">
-    <img src="res/model.png" alt="model" style="max-width: 50%; max-height: 80vh">
+    <img src="res/model.png" alt="model" style="width: 50%">
 </p>
 <p align="center">
     <b>Transformer architecture</b>
