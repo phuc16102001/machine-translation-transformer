@@ -1,9 +1,8 @@
 import torch
 from utils.mask import create_mask
-from config.config import config
 import numpy as np
 
-def validiate(model, valid_iter, criterion, src_pad, trg_pad):
+def validiate(model, valid_iter, criterion, src_pad, trg_pad, device):
     model.eval()
     
     with torch.no_grad():
@@ -13,8 +12,8 @@ def validiate(model, valid_iter, criterion, src_pad, trg_pad):
             trg = batch.trg.transpose(0,1).cuda()
             trg_input = trg[:, :-1]
             
-            src_mask = create_mask(src, src_pad, False, config['device'])
-            trg_mask = create_mask(trg_input, trg_pad, True, config['device'])
+            src_mask = create_mask(src, src_pad, False, device)
+            trg_mask = create_mask(trg_input, trg_pad, True, device)
             preds = model(src, trg_input, src_mask, trg_mask)
             ys = trg[:, 1:].contiguous().view(-1)
             

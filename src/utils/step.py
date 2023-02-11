@@ -1,7 +1,6 @@
 from utils.mask import create_mask
-from config.config import config
 
-def step(model, opt, batch, criterion, src_pad, trg_pad):
+def step(model, opt, batch, criterion, src_pad, trg_pad, device):
     model.train()
     
     src = batch.src.transpose(0, 1) # convert to (bs x seq_len)
@@ -9,8 +8,8 @@ def step(model, opt, batch, criterion, src_pad, trg_pad):
     trg_input = trg[:, :-1] # Exclude last word to predict
     
     # Create mask
-    src_mask = create_mask(src, src_pad, False, config['device'])
-    trg_mask = create_mask(trg_input, trg_pad, True, config['device'])
+    src_mask = create_mask(src, src_pad, False, device)
+    trg_mask = create_mask(trg_input, trg_pad, True, device)
     
     # Predict
     preds = model(src, trg_input, src_mask, trg_mask)
