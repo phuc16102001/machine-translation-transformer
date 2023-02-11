@@ -14,14 +14,17 @@ def main(args):
     model_folder = args.model_folder
     sentence = args.prompt
 
+    print("Load config")
     config_file = open(os.path.join(model_folder, 'config.json'))
     cfg = json.load(config_file)
     max_strlen = cfg['max_strlen']
     k = cfg['k']
+    print(cfg)
 
     device = 'cpu'
     if (torch.cuda.is_available()): 
         device = 'cuda'
+    print(f"Use {device}")
 
     print("Creating tokenizer")
     vi_tokenizer = tokenizer('vi_core_news_lg')

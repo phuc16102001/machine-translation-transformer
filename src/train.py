@@ -15,6 +15,7 @@ import shutil
 import json
 
 def main():
+    print("Load config")
     config_file = open('config/config.json')
     cfg = json.load(config_file)
     d_model = cfg['d_model']
@@ -25,9 +26,12 @@ def main():
     n_layers = cfg['n_layers']
     heads = cfg['heads']
     dropout = cfg['dropout']
+    print(cfg)
 
-    if (torch.cuda.is_available()): device = 'cuda'
-    else: device = 'cpu'
+    device = 'cpu'
+    if (torch.cuda.is_available()): 
+        device = 'cuda'
+    print(f"Use {device}")
 
     print("Loading data")
     df_train = create_data('../data/train.vi', '../data/train.en')
