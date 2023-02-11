@@ -140,4 +140,5 @@ if __name__=="__main__":
         required=True,
         help="Path to model folder"
     )
-    main()
+    args = parser.parse_args()
+    main(args)
