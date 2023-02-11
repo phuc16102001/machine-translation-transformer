@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 
-from config.config import config
-
 from utils.reader import create_data
 from utils.tokenizer import tokenizer
 from utils.field import create_field
