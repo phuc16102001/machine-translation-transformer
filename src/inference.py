@@ -10,14 +10,18 @@ from argparse import ArgumentParser
 import json
 
 def main(args):
+    config_file = open('../models/config.json')
+    cfg = json.load(config_file)
+    max_strlen = config_file['max_strlen']
+    k = config_file['k']
+    device = config_file['device']
+
     print("Creating tokenizer")
     vi_tokenizer = tokenizer('vi_core_news_lg')
     en_tokenizer = tokenizer('en_core_web_sm')
     src_field, trg_field = create_field(vi_tokenizer, en_tokenizer)
 
     print("Loading vocabulary")
-    config_file = open('../models/config.json')
-    cfg = json.load(config_file)
     src_vocab = torch.load('../models/src_vocab.pth')
     trg_vocab = torch.load('../models/trg_vocab.pth')
     src_field.vocab = src_vocab
@@ -43,7 +47,7 @@ def main(args):
     print("Running inference")
     sentence = args.prompt
     print(f"Input: {sentence}")
-    print(f"Output: {translate(sentence, model, src_field, trg_field)}")
+    print(f"Output: {translate(sentence, model, src_field, trg_field, max_strlen, device, k)}")
 
 if __name__=="__main__":
     parser = ArgumentParser()

@@ -1,4 +1,3 @@
-from config.config import config
 from torch.autograd import Variable
 import torch
 import re
@@ -14,12 +13,8 @@ def convert_to_word(idx_list, vocab):
         word_list.append(vocab.itos[tok])
     return ' '.join(word_list)
 
-def translate(sentence, model, src_field, trg_field):
+def translate(sentence, model, src_field, trg_field, max_strlen, device, k):
     model.eval()
-
-    max_strlen = config['max_strlen']
-    device = config['device']
-    k = config['k']
 
     indexed = []
     sentence = src_field.preprocess(sentence)
