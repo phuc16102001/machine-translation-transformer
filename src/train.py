@@ -13,8 +13,13 @@ from utils.validation import validiate
 from modules.transformer import Transformer
 import shutil
 import json
+import os
+from argparse import ArgumentParser
 
-def main():
+def main(args):
+    data_folder = args.data_folder
+    model_folder = args.model_folder
+
     print("Load config")
     config_file = open('config/config.json')
     cfg = json.load(config_file)
@@ -34,8 +39,12 @@ def main():
     print(f"Use {device}")
 
     print("Loading data")
-    df_train = create_data('../data/train.vi', '../data/train.en')
-    df_val = create_data('../data/tst2013.vi', '../data/tst2013.en')
+    train_src = os.path.join(data_folder, 'train.vi')
+    train_trg = os.path.join(data_folder, 'train.en')
+    val_src = os.path.join(data_folder, 'tst2013.vi')
+    val_trg = os.path.join(data_folder, 'tst2013.en')
+    df_train = create_data(train_src, train_trg)
+    df_val = create_data(val_src, val_trg)
     print(f"Train size: {len(df_train)}")
     print(f"Validate size: {len(df_val)}")
 
@@ -53,8 +62,8 @@ def main():
     trg_pad = trg_field.vocab.stoi['<pad>']
     print(f"Source vocabulary size: {len(src_field.vocab)}")
     print(f"Target vocabulary size: {len(trg_field.vocab)}")
-    torch.save(src_field.vocab, '../models/src_vocab.pth')
-    torch.save(trg_field.vocab, '../models/trg_vocab.pth')
+    torch.save(src_field.vocab, os.path.join(model_folder, 'src_vocab.pth'))
+    torch.save(trg_field.vocab, os.path.join(model_folder, 'trg_vocab.pth'))
 
     print(f"Creating model with d_model = {d_model}")
     model = Transformer(
@@ -66,7 +75,7 @@ def main():
         dropout = dropout
     )
     model = model.to(device)
-    shutil.copyfile('config/config.json', '../models/config.json')
+    shutil.copyfile('config/config.json', os.path.join(model_folder, 'config.json'))
 
     print("Init parameters")
     for p in model.parameters():
@@ -80,9 +89,9 @@ def main():
             betas = (0.9, 0.98), 
             eps = 1e-9
         ),
-        0.2, 
-        d_model, 
-        4000
+        init_lr=0.2, 
+        d_model=d_model, 
+        n_warmup=4000
     )
 
     print("Creating loss function")
@@ -92,6 +101,7 @@ def main():
         smoothing = 0.1
     )
 
+    best_loss = None
     print("Training begin")
     for epoch in range(n_epoch):
         total_loss = 0
@@ -109,7 +119,25 @@ def main():
 
         valid_loss = validiate(model, val_dataset, criterion, src_pad, trg_pad, device)
         print('epoch: {:03d} - valid loss: {:.4f}'.format(epoch+1, valid_loss))
-        torch.save(model.state_dict(), f'../models/model.{epoch+1}.pt')
+        torch.save(model.state_dict(), os.path.join(model_folder, f'model.{epoch+1}.pt'))
+        if ((best_loss is None) or (best_loss>valid_loss)):
+            best_loss = valid_loss
+            torch.save(model.state_dict(), os.path.join(model_folder, f'model_best.pt'))
 
 if __name__=="__main__":
+    parser = ArgumentParser()
+    parser.add_argument(
+        '-d',
+        '--data_folder',
+        type=str,
+        required=True,
+        help="Path to data folder"
+    )
+    parser.add_argument(
+        '-m',
+        '--model_folder',
+        type=str,
+        required=True,
+        help="Path to model folder"
+    )
     main()
