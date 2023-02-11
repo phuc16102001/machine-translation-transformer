@@ -2,14 +2,14 @@
 
 ## Introduction
 
-[Machine Translation](https://en.wikipedia.org/wiki/Machine_translation) is a task that we need to translate a sentence from a language to another language. Particularly, in this repository, I have leverage the [Transformer model](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) to translate from Vietnamese (vi) to English (en).
+[Machine Translation](https://en.wikipedia.org/wiki/Machine_translation) is a task that we need to translate a sentence from a language to another language. Particularly, in this repository, I have leveraged the [Transformer model](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) to translate from Vietnamese (vi) to English (en).
 
 ## Model architecture
 
 Transformer is a very powerful model because of using the self-attention mechanism under the hood. It can improve the weakness of many types of recurrent neural network (RNN). Moreover, the model can be trained much faster since it can feed all the data once only, instead of one-by-one.
 
 <p align="center">
-    <img src="res/model.png" alt="model" style="width: 70%">
+    <img src="res/model.png" alt="model" style="max-width: 50%; max-height: 80vh">
 </p>
 <p align="center">
     <b>Transformer architecture</b>
@@ -19,6 +19,12 @@ Transformer is a very powerful model because of using the self-attention mechani
 ## Gallery
 
 
+<p align="center">
+    <img src="res/gallery.png" alt="gallery" style="width: 80%">
+</p>
+<p align="center">
+    <b>Inference examples</b>
+</p>
 
 ## Usage
 
@@ -35,6 +41,12 @@ Also, because we need to use tokenizer for Vietnames, we will install the model 
 
 ```bash
 pip install https://gitlab.com/trungtv/vi_spacy/-/raw/master/vi_core_news_lg/dist/vi_core_news_lg-0.0.1.tar.gz
+```
+
+And the model for English:
+
+```bash
+python -m spacy download en_core_web_sm
 ```
 
 ### Train model
