@@ -17,7 +17,6 @@ import json
 def main():
     config_file = open('config/config.json')
     cfg = json.load(config_file)
-    device = cfg['device']
     d_model = cfg['d_model']
     batch_size = cfg['batch_size']
     max_strlen = cfg['max_strlen']
@@ -26,6 +25,9 @@ def main():
     n_layers = cfg['n_layers']
     heads = cfg['heads']
     dropout = cfg['dropout']
+
+    if (torch.cuda.is_available()): device = 'cuda'
+    else: device = 'cpu'
 
     print("Loading data")
     df_train = create_data('../data/train.vi', '../data/train.en')
@@ -59,15 +61,8 @@ def main():
         heads = heads,
         dropout = dropout
     )
-    shutil.copyfile('config/config.json', '../models/config.json')
-
-    n_gpu = torch.cuda.device_count()
-    multiple_gpu = n_gpu > 1
-    is_cuda = ('cuda' in device)
-    if (multiple_gpu and is_cuda):
-        print(f"Use {n_gpu} GPUs")
-        model = nn.DataParallel(model)
     model = model.to(device)
+    shutil.copyfile('config/config.json', '../models/config.json')
 
     print("Init parameters")
     for p in model.parameters():
